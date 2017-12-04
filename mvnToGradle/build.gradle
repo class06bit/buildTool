@@ -1,0 +1,30 @@
+apply plugin: 'java'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'war'
+
+group = 'com.hb'
+version = '0.0.1-SNAPSHOT'
+
+description = """mvnToGradle Maven Webapp"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+
+repositories {
+     mavenCentral()
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+dependencies {
+    testCompile group: 'junit', name: 'junit', version:'3.8.1'
+}
+sourceSets {
+    main.java.srcDirs=['src/main/java']
+    main.resources.srcDirs=['src/main/resources', 'src/main/resources-' + target]
+}
+
+war {
+    archiveName 'api.war'
+    from 'webapp' // adds a file-set to the root of the archive
+}
